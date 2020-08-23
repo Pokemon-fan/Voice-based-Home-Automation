@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "284233031282",
+    "firebase_url": "https://automate-327ab.firebaseio.com",
+    "project_id": "automate-327ab",
+    "storage_bucket": "automate-327ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:284233031282:android:2814b8aec05a3cfea82ceb",
+        "android_client_info": {
+          "package_name": "com.example.iot_prj"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "284233031282-1ruuongpsv2uo2ckfhglh5rehsbi4shj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOjN7-3cYAhqIXfr4cr6sBfglx5lS98C8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "284233031282-dqnn2m9cg87rgooj9iaqnu8avbdqfeoc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
