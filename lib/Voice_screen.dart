@@ -4,8 +4,6 @@ import 'package:highlight_text/highlight_text.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:firebase_database/firebase_database.dart';
 
-
-
 class SpeechScreen extends StatefulWidget {
   @override
   _SpeechScreenState createState() => _SpeechScreenState();
@@ -58,7 +56,28 @@ class _SpeechScreenState extends State<SpeechScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Confidence: ${(_confidence * 100.0).toStringAsFixed(1)}%'),
+        backgroundColor: Color(0xFFB27409),
+        automaticallyImplyLeading: false,
+        title: Center(
+          child: Row(
+            children: [
+              Icon(Icons.menu),
+              Expanded(
+                flex: 1,
+                child: Center(
+                  child: Text(
+                    'iHome.ly',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        // Text('Confidence: ${(_confidence * 100.0).toStringAsFixed(1)}%'),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: AvatarGlow(
@@ -75,22 +94,31 @@ class _SpeechScreenState extends State<SpeechScreen> {
       ),
       body: SingleChildScrollView(
         reverse: true,
-        child: Column(
-          children: <Widget>[
-            _isListening?Center(child: Text("PRESS THE BUTTON AGAIN TO STOP LISTENING!",textAlign: TextAlign.center,)):SizedBox(),
-            Container(
-              padding: const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 150.0),
-              child: TextHighlight(
-                text: _text.isEmpty ? "Waiting..." : _text,
-                words: _highlights,
-                textStyle: TextStyle(
-                  fontSize: 40.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
+        child: Container(
+          decoration: ,
+          child: Column(
+            children: <Widget>[
+              _isListening
+                  ? Center(
+                      child: Text(
+                      "PRESS THE BUTTON AGAIN TO STOP LISTENING!",
+                      textAlign: TextAlign.center,
+                    ))
+                  : SizedBox(),
+              Container(
+                padding: const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 150.0),
+                child: TextHighlight(
+                  text: _text.isEmpty ? "Waiting..." : _text,
+                  words: _highlights,
+                  textStyle: TextStyle(
+                    fontSize: 40.0,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -116,42 +144,44 @@ class _SpeechScreenState extends State<SpeechScreen> {
     } else {
       setState(() {
         _isListening = false;
-        _text=responseToSpeech(_text);
+        _text = responseToSpeech(_text);
       });
       _speech.stop();
     }
   }
 }
 
- String responseToSpeech(String text){
-   final fb = FirebaseDatabase.instance;
-   List textList=text.split(' ');
-   bool status;
-   String device;
-   if(text=="nope" ||text=="no thank you"||text=="that's it"||text=="that is it"||text=="this is enough" )
-     return "Ok then, have a good day!";
-   else if(text=="hi"||text=="hi how are you doing"||text=="hello")
-     return "Hi, please press the button twice to speak your command.";
+String responseToSpeech(String text) {
+  final fb = FirebaseDatabase.instance;
+  List textList = text.split(' ');
+  bool status;
+  String device;
+  if (text == "nope" ||
+      text == "no thank you" ||
+      text == "that's it" ||
+      text == "that is it" ||
+      text == "this is enough")
+    return "Ok then, have a good day!";
+  else if (text == "hi" || text == "hi how are you doing" || text == "hello")
+    return "Hi, please press the button twice to speak your command.";
 
-   for(var value in textList){
-     if(value=='on')
-       status=true;
-     else if (value=='off')
-       status=false;
-     else if (value=='lights'||value=='light')
-       device='Lights';
-     else
-       continue;
-   }
+  for (var value in textList) {
+    if (value == 'on')
+      status = true;
+    else if (value == 'off')
+      status = false;
+    else if (value == 'lights' || value == 'light')
+      device = 'Lights';
+    else
+      continue;
+  }
 
-   if(status==true && device=='Lights'){
-     fb.reference().child("Lights").set("ON");
-     return "Ok! Turning On the Lights. Anything else?";
-   }
-   else if(status==false && device=='Lights') {
-     fb.reference().child("Lights").set("OFF");
-     return "Ok! Turning Off the Lights. Anything else?";
-   }
-   else
-     return "Sorry your command was invalid. You can try again!";
- }
+  if (status == true && device == 'Lights') {
+    fb.reference().child("Lights").set("ON");
+    return "Ok! Turning On the Lights. Anything else?";
+  } else if (status == false && device == 'Lights') {
+    fb.reference().child("Lights").set("OFF");
+    return "Ok! Turning Off the Lights. Anything else?";
+  } else
+    return "Sorry your command was invalid. You can try again!";
+}
