@@ -88,6 +88,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
         repeatPauseDuration: Duration(milliseconds: 100),
         repeat: true,
         child: FloatingActionButton(
+          backgroundColor: Color(0xFFB27409),
           onPressed: _listen,
           child: Icon(_isListening ? Icons.mic : Icons.mic_none),
         ),
@@ -95,15 +96,19 @@ class _SpeechScreenState extends State<SpeechScreen> {
       body: SingleChildScrollView(
         reverse: true,
         child: Container(
-          decoration: ,
           child: Column(
             children: <Widget>[
               _isListening
-                  ? Center(
-                      child: Text(
-                      "PRESS THE BUTTON AGAIN TO STOP LISTENING!",
-                      textAlign: TextAlign.center,
-                    ))
+                  ? Container(
+                      color: Colors.green,
+                      child: Container(
+                        child: Center(
+                            child: Text(
+                          "PRESS THE BUTTON AGAIN TO STOP LISTENING!",
+                          textAlign: TextAlign.center,
+                        )),
+                      ),
+                    )
                   : SizedBox(),
               Container(
                 padding: const EdgeInsets.fromLTRB(30.0, 30.0, 30.0, 150.0),
