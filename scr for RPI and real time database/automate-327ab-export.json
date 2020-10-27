@@ -1,0 +1,23 @@
+{
+  "Lights" : "ON",
+  "Room1" : {
+    "Fan1" : "OFF",
+    "Light1" : "OFF",
+    "Light2" : "OFF"
+  },
+  "Room2" : {
+    "Fan1" : "OFF",
+    "Light1" : "OFF",
+    "Light2" : "OFF"
+  },
+  "Room3" : {
+    "Fan1" : "OFF",
+    "Light1" : "OFF",
+    "Light2" : "OFF"
+  },
+  "Room4" : {
+    "Light1" : "OFF",
+    "Light2" : "OFF",
+    "Light3" : "OFF"
+  }
+}

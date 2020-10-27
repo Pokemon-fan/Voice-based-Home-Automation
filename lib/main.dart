@@ -47,9 +47,10 @@ class MainScreen extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Color(0xFFB27409), Colors.black])),
+            colors: [Color(0xFFB27409), Colors.black],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          )),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[

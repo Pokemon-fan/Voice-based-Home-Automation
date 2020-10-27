@@ -12,7 +12,7 @@ class _ManualControlState extends State<ManualControl> {
   retrieveData(String device) async {
     await fb.reference().child(device).once().then((DataSnapshot data) {
       setState(() {
-        if (device == "Lights") lights = data.value;
+        lights = data.value;
         print(lights);
       });
     });
@@ -21,7 +21,7 @@ class _ManualControlState extends State<ManualControl> {
   @override
   void initState() {
     super.initState();
-    retrieveData('Lights');
+    retrieveData('Room1/Light1');
   }
 
   bool flag1 = false;
@@ -70,16 +70,20 @@ class _ManualControlState extends State<ManualControl> {
                           height: 15,
                         ), //TODO: ONPRESSED COMMANDS: ON/OFF
                         FlatButton.icon(
-                          onPressed: () {
+                          onPressed: () async {
+                            print(flag1);
                             if (!flag1) {
                               //true is on ,false is off
                               flag1 = true;
-                              fb.reference().child("Room1/Light1").set("ON");
+                              await fb
+                                  .reference()
+                                  .child("Room1/Light1")
+                                  .set("ON");
                             } else {
                               flag1 = false;
                               fb.reference().child("Room1/Light1").set("OFF");
                             }
-                            retrieveData("Lights");
+                            retrieveData("Room1/Light1");
                           },
                           icon: Icon(Icons.power_settings_new),
                           label: Text('Light 1'),

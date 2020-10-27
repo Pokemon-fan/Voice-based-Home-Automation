@@ -182,10 +182,10 @@ String responseToSpeech(String text) {
   }
 
   if (status == true && device == 'Lights') {
-    fb.reference().child("Lights").set("ON");
+    fb.reference().child("Room1/Light1").set("ON");
     return "Ok! Turning On the Lights. Anything else?";
   } else if (status == false && device == 'Lights') {
-    fb.reference().child("Lights").set("OFF");
+    fb.reference().child("Room1/Light1").set("OFF");
     return "Ok! Turning Off the Lights. Anything else?";
   } else
     return "Sorry your command was invalid. You can try again!";
